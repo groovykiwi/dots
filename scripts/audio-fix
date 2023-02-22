@@ -1,0 +1,20 @@
+#!/bin/bash
+
+music_status=$(playerctl status)
+
+killall pulseaudio
+pulseaudio
+
+#Fixes issue where Spotify doesn't output sound
+if pgrep -x spotify >/dev/null; then
+  killall spotify
+fi
+spotify &
+#If music was playing start it again
+if [ "$music_status" == "Playing" ]; then
+  sleep 3s
+  playerctl play
+fi
+
+#Updates Polybar
+killall polybar && polybar -r top

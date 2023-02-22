@@ -1,0 +1,42 @@
+#!/bin/sh
+
+BLANK='#00000000'
+CLEAR='#ffffff22'
+DEFAULT='#1d2021ff'
+TEXT='#d4be98'
+WRONG='#ea6962'
+VERIFYING='#e78a4e'
+
+wal="/$(cat .config/nitrogen/bg-saved.cfg | grep file | sed 's:[^/]*/\(.*\):\1:')"
+
+i3lock \
+    -i $wal \
+    --insidever-color=$DEFAULT \
+    --ringver-color=$VERIFYING \
+    \
+    --insidewrong-color=$DEFAULT \
+    --ringwrong-color=$WRONG \
+    \
+    --inside-color=$DEFAULT \
+    --ring-color=$VERIFYING \
+    --line-color=$BLANK \
+    --separator-color=$DEFAULT \
+    \
+    --verif-color=$TEXT \
+    --wrong-color=$TEXT \
+    --time-color=$TEXT \
+    --date-color=$TEXT \
+    --layout-color=$TEXT \
+    --keyhl-color=$WRONG \
+    --bshl-color=$WRONG \
+    --time-size=80 \
+    --date-size=30 \
+    --noinput-text="No Input" \
+    --radius 150 \
+    --screen 1 \
+    --blur 5 \
+    --clock \
+    --indicator \
+    --time-str="%H:%M" \
+    --date-str="%A %d" \
+    --keylayout 1

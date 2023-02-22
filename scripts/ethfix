@@ -1,0 +1,5 @@
+#!/bin/bash
+adpater=$(ip link show | grep enp | sed 's/\s//g' | cut -d':' -f2)
+sudo ip link set $adapter up
+sudo dhcpcd $adapter
+sudo modprobe r8169

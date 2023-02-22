@@ -1,0 +1,5 @@
+#!/bin/bash
+
+[ "$1" == "rofi" ] && cat ~/.config/rofi/nerd-font-cheatsheet.txt | rofi -i -dmenu -p ">" | cut -d" " -f1 | tr '\n' ' ' | sed 's/⠀//g; s/\s//g' | xclip -selection clipboard && exit
+
+cat ~/.config/rofi/nerd-font-cheatsheet.txt | fzy -l 15 | cut -d" " -f1 | tr '\n' ' ' | sed 's/⠀//g; s/\s//g' | xclip -selection clipboard

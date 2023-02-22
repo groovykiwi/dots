@@ -1,0 +1,230 @@
+#        _              _     _           _ _                 
+#       | | _____ _   _| |__ (_)_ __   __| (_)_ __   __ _ ___ 
+#       | |/ / _ \ | | | '_ \| | '_ \ / _` | | '_ \ / _` / __|
+#       |   <  __/ |_| | |_) | | | | | (_| | | | | | (_| \__ \
+#       |_|\_\___|\__, |_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/
+#                 |___/                             |___/     
+#
+
+set $mod Mod4
+
+# Window management
+bindsym $mod+Shift+r restart
+floating_modifier $mod
+bindsym $mod+Shift+a kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+i focus mode_toggle
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Screenshots
+bindsym Print exec xfce4-screenshooter -f -c
+bindsym Shift+Print exec  xfce4-screenshooter -r -c
+bindsym CTRL+Print exec xfce4-screenshooter -f 
+bindsym CTRL+Shift+Print exec xfce4-screenshooter -r 
+
+# Software
+bindsym $mod+Return exec alacritty
+#bindsym $mod+space exec rofi -show run -font "fira code nerd font 14" -lines 5 -width 30
+bindsym $mod+space exec rofi -show run
+
+# Scripts
+#bindsym $mod+Shift+F1 exec $HOME/scripts/termlayout
+bindsym $mod+e exec $HOME/scripts/nf-cheatsheet rofi
+bindsym $mod+Shift+Return exec $HOME/scripts/floatterm
+bindsym $mod+v exec $HOME/scripts/resize-win
+bindsym Mod1+k exec $HOME/scripts/fkill rofi
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl -p spotify play-pause
+bindsym XF86AudioStop exec playerctl -p spotify stop
+bindsym XF86AudioNext exec playerctl -p spotify next
+bindsym XF86AudioPrev exec playerctl -p spotify previous
+
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+ && $HOME/scripts/dunst-brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -n15% set 5%-  && $HOME/scripts/dunst-brightness
+
+
+#                    _                                  
+#__      _____  _ __| | _____ _ __   __ _  ___ ___  ___ 
+#\ \ /\ / / _ \| '__| |/ / __| '_ \ / _` |/ __/ _ \/ __|
+# \ V  V / (_) | |  |   <\__ \ |_) | (_| | (_|  __/\__ \
+#  \_/\_/ \___/|_|  |_|\_\___/ .__/ \__,_|\___\___||___/
+#                            |_|                        
+
+set $ws1 "1:"
+set $ws2 "2:爵"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:"
+
+# switch to workspace
+bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+Right workspace next
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+# Assign applications to Workspaces
+assign [class="LibreWolf"] $ws2
+assign [class="code-oss"] $ws3
+assign [class="Transmission-gtk"] $ws8
+assign [class="discord"] $ws9
+for_window [class="Spotify"] move to workspace $ws10
+   
+#            _             _               
+#        ___| |_ __ _ _ __| |_ _   _ _ __  
+#       / __| __/ _` | '__| __| | | | '_ \ 
+#       \__ \ || (_| | |  | |_| |_| | |_) |
+#       |___/\__\__,_|_|   \__|\__,_| .__/ 
+#                                   |_|    
+#   
+
+# System Processes
+exec --no-startup-id dunst
+exec --no-startup-id picom #killall picom ; sleep 0.1s && picom
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 #GNOME Polkit Authentification 
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/scripts/lock
+exec --no-startup-id xinput set-prop 12 311 0  # Mouse normal scroll
+
+#exec --no-startup-id xfce4-clipman
+#exec --no-startup-id ~/.fehbg
+#exec --no-startup-id xfce4-power-manager
+#exec --no-startup-id nm-applet
+#exec --no-startup-id tumbler #Thumbnails in Thunar
+
+# Software
+#exec i3-msg "workspace $ws1"
+#exec --no-startup-id nitrogen --random --set-zoom-fill ~/pics/walls/current
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id polybar -r top
+exec --no-startup-id '$HOME/scripts/i3-alternating-layout/alternating_layouts.py'
+exec --no-startup-id numlockx
+exec --no-startup-id redshift-gtk
+
+#exec --no-startup-id espanso restart
+#exec --no-startup-id protonvpn-tray
+#exec  $HOME/scripts/termlayout 
+#exec i3-msg "workspace $ws2; exec brave"
+#exec code
+#exec spotify
+#exec i3-msg "workspace $ws4; exec Thunar"
+#exec kdeconnect-indicator
+
+
+
+#                 _           _                   
+#       __      _(_)_ __   __| | _____      _____ 
+#       \ \ /\ / / | '_ \ / _` |/ _ \ \ /\ / / __|
+#        \ V  V /| | | | | (_| | (_) \ V  V /\__ \
+#         \_/\_/ |_|_| |_|\__,_|\___/ \_/\_/ |___/
+#
+
+font pango:SF Pro Text 13
+gaps inner 10
+#smart_gaps on
+focus_on_window_activation urgent #focus
+
+# Window Colors
+set_from_resource $fg i3wm.color7 #ffffff
+set_from_resource $bg i3wm.color0 #000000
+set_from_resource $c1 i3wm.color1 #ff0000
+
+#Window state           border  background text  indicator
+client.focused          $bg     $c1        $fg   $c1       
+client.focused_inactive $bg     $bg        $fg   $bg       
+client.unfocused        $bg     $bg        $fg   $bg       
+client.urgent           $bg     $bg        $fg   $bg       
+
+
+# Set borders for all windows
+for_window [class="^.*"] border pixel 2
+
+# add "border normal" if you want a title bar
+for_window [class="Pavucontrol"] floating enable 
+for_window [class="firefox" instance="Places"] floating enable 
+for_window [class="G213colors-gui"] floating enable 
+for_window [class="Piper"] floating enable
+for_window [class="Tk"] floating enable 
+for_window [class="Cm-rgb-gui"] floating enable 
+for_window [class="Cm-rgb-monitor-gui"] floating enable 
+for_window [class="scrcpy"] floating enable
+for_window [class="Baobab"] floating enable 
+for_window [class="Nm.*"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="empty-folder-cleaner"] floating enable 
+
+for_window [instance="floatterm"] floating enable 
+for_window [instance="spotify-lyrics"] floating enable 
+for_window [instance="qpaeq"] floating enable 
+for_window [instance="sxiv"] floating enable
+for_window [instance="gnome-control-center"] floating enable 
+
+

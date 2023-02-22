@@ -1,0 +1,23 @@
+#!/bin/bash
+#SCRIPT ADD
+
+script_file="$HOME/scripts/$1"
+file_type=$2
+editor="code"
+[ -z $2 ] && echo "Usage: $0 <name> <script-type>" && exit
+
+if [ -e $script_file ]; then
+  echo "File already exists."
+elif [ "$2" == "bash" ]; then
+  echo "#!/bin/bash" >$script_file
+  chmod +x $script_file
+  printf "Open the script in ${editor}? "
+  read answer
+  [ "$answer" == "y" ] && $editor $script_file # && wmctrl -s 2
+elif [ "$2" == "python" ]; then
+  echo "#!/usr/bin/env python" >$script_file
+  chmod +x $script_file
+  printf "Open the script in ${editor}? "
+  read answer
+  [ "$answer" == "y" ] && $editor $script_file # && wmctrl -s 2
+fi

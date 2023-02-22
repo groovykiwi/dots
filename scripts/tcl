@@ -1,0 +1,8 @@
+#!/bin/bash
+NC='\033[0m'
+C1='\033[1;31m'
+
+echo -e "The Trash is using ${C1}$(du -sh ~/.local/share/Trash/files/ | sed 's/.local.*// ;s/\s//')${NC} of space"
+printf "Empty it? " && read answer
+
+[ "$answer" = "y" ] && trash-empty && echo "The Trash was emptied"

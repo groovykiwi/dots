@@ -1,0 +1,13 @@
+#!/bin/bash
+c0='\033[0m'
+c1='\033[1;31m'
+
+#Local IP
+local_ip="$(ip route get 1 | awk -F'src' '{print $2; exit}')"
+local_ip="${local_ip/uid*/}"
+echo -e "\n${c1}Local IP${c0}  >$local_ip"
+
+#Public IP
+public_ip_host="http://ident.me"
+public_ip="$(curl -s --max-time "10" -w '\n' "$public_ip_host")"
+echo -e "${c1}Public IP${c0} > $public_ip\n"

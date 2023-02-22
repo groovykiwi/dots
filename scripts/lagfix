@@ -1,0 +1,7 @@
+#!/bin/bash
+nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+if ! [[ -z $(pgrep picom) ]]; then
+  killall picom && sleep 0.1 && i3-msg exec picom
+else
+  i3-msg exec picom
+fi

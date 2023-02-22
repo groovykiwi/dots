@@ -1,0 +1,2 @@
+#!/bin/bash
+xcolor -c %{02hr}%{02hg}%{02hb} | xclip -selection clipboard

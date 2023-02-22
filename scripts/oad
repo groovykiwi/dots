@@ -1,0 +1,27 @@
+#!/bin/bash
+
+headset="output:analog-stereo+input:analog-stereo"
+speaker=$(pacmd list-cards | grep 'output:hdmi.\+available: \(unknown\|yes\)' | sed '1q' | cut -d':' -f1-2 | sed 's/\s\+//')
+[ -z $speaker ] && speaker="output:hdmi-stereo-extra1"
+
+check=$(pacmd list-cards | grep "<$speaker>")
+
+if [ "$1" == "status" ]; then
+  [ "$check" == "" ] && echo " " || echo "蓼 "
+  exit
+fi
+
+if [ "$1" == "pavu" ]; then
+  [ -z $(pgrep pavucontrol) ] && i3-msg exec pavucontrol || wmctrl -x -R pavucontrol
+  exit
+fi
+
+if [ "$check" == "" ]; then
+  notify-send "Switching to Speakers"
+  pactl set-card-profile 0 $speaker
+  pactl set-card-profile 1 off
+else
+  notify-send "Switching to Headset"
+  pactl set-card-profile 0 off
+  pactl set-card-profile 1 $headset
+fi

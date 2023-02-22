@@ -1,0 +1,22 @@
+#!/bin/bash
+# SCRIPT EDIT
+# Easily edits scripts using fzy
+editor="code"
+
+[ "$1" == "-h" ] || [ "$1" == "--help" ] && echo -e "\noptional arguments:
+  -d,                 Put script in the trash
+  -l,                 Create a symbolic link to script in /usr/bin
+  -dl,                Delete symbolic link of script in /usr/bin
+  -h, --help          Show this help message and exit\n" && exit
+
+name=$(
+  for entry in "$HOME/scripts"/*; do ! [ -d $entry ] && ! [[ $entry =~ .*\..* ]] && echo $entry; done \
+    | sed 's/.*scripts\///g' \
+    | fzy -l 15
+)
+
+[ -z "$name" ] && echo "No script selected, exiting." && exit
+[ "$1" == "-d" ] && trash-put /home/nate/scripts/$name && echo "Moved $name to trash" && exit
+[ "$1" == "-l" ] && sudo ln -s /home/nate/scripts/$name /usr/bin && echo "Added $name to /usr/bin" && exit
+[ "$1" == "-dl" ] && sudo rm -i /usr/bin/$name && echo "Removed $name from /usr/bin" && exit
+! [ -z $name ] && $editor "$HOME/scripts/$name" # && wmctrl -s 2

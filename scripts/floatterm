@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#st
+#term="st -n floatterm -g 50x20-50+150"
+#alacritty
+term="alacritty --config-file $HOME/.config/alacritty/floatterm.yml"
+#kitty
+#term="kitty --name floatterm --config $HOME/.config/kitty/float-kitty.conf"
+term_status=$(pgrep floatterm)
+[ -n $term_status ] && $term || wmctrl -x -R floatterm

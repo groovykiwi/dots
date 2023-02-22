@@ -1,0 +1,4 @@
+#!/bin/bash
+[ -z $1 ] && pid=$(ps -e -o command,pid | sed '/\[.*\s/d; /COMMAND.*$/d' | fzy -l 15)
+[ "$1" == "rofi" ] && pid=$(ps -e -o command,pid | sed '/\[.*\s/d; /COMMAND.*$/d' | rofi -dmenu -i -p "fkill >")
+! [ -z $pid ] && kill -9 $pid

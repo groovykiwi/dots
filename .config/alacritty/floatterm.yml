@@ -1,0 +1,8 @@
+import:
+  - /home/nate/.config/alacritty/alacritty.yml
+
+window:
+  class: floatterm
+  dimensions:
+    columns: 50
+    lines: 15

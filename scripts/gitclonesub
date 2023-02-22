@@ -1,0 +1,7 @@
+#!/bin/bash
+NC='\033[0m'
+C1='\033[1;31m'
+C2='\033[1;36m'
+path=$(echo "$1" | sed -e 's,tree/master,trunk,g')
+
+svn checkout $path && echo -e "The folder${C2} '"${path##*/}"' ${NC}has been saved in ${C1}$PWD"

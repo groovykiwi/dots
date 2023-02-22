@@ -1,0 +1,21 @@
+#!/bin/bash
+term="alacritty -t"
+nc='\033[0m' # No Color
+accent='\033[1;31m'
+accent2='\033[1;37m'
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+wmctrl -s 0 && i3-msg "focus parent, focus parent, focus parent, focus parent, focus parent,  kill "
+i3-msg "workspace 1:; append_layout ~/.config/i3/workspace-1.json" >/dev/null
+
+$term ranger -e sh -c "ranger;bash" &
+$term main -e sh -c "
+echo -e '$bold$accent[ Welcome Back! How are you today $accent2$USER$accent ? ]$nc$bold';
+#curl -m 5 wttr.in/Iskele?format="~+Weather+:+%t+%C+~" 2>/dev/null;
+echo "";
+neofetch;
+$SHELL" &
+$term top -e sh -c "ytop -m;bash" &
+
+touch -m $HOME/.config/picom.conf

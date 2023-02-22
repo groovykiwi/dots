@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ -z $1 ]
+then
+    status=$(gsettings get org.gnome.desktop.interface enable-animations)
+else
+    status="true"
+    [ "$1" == "on" ] && status="false"
+fi
+
+if [ "true" == "$status" ]
+then
+    gsettings set org.gnome.desktop.interface enable-animations false
+    powerprofilesctl set power-saver
+    echo "Set Power Saver mode and Disabled animations"
+else
+    gsettings set org.gnome.desktop.interface enable-animations true
+    powerprofilesctl set performance
+    echo "Set Performance mode and Enabled animations"
+fi

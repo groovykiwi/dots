@@ -1,0 +1,4 @@
+#!/bin/bash
+[ -z $1 ] && firewall-cmd --get-default-zone && exit
+[ "$1" == "zones" ] && firewall-cmd --get-zones && exit
+firewall-cmd --set-default-zone $1

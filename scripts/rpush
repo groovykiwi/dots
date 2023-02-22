@@ -1,0 +1,15 @@
+#!/bin/bash
+while getopts e:d flag; do
+  case "${flag}" in
+  e) exclude=${OPTARG} ;;
+  d) delete="True" ;;
+  esac
+done
+
+[ -z $1 ] && echo "Usage: rpush <local file> <server dir> -d -e  " && exit
+
+flag=""
+[  $delete == "True" ] && flag+="--delete "
+[ -n $exclude ] && flag+="--exclude $exclude "
+
+rsync -azP $flag $1 root@houlamy.com:$2

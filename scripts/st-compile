@@ -1,0 +1,17 @@
+#!/bin/bash
+
+while getopts bp: flag; do
+  case "${flag}" in
+  p) patch=$OPTARG ;;
+  b) backup="True" ;;
+  esac
+done
+
+date=$(date +"%F--%H-%M")
+
+[ "$backup" == "True" ] && cat $HOME/st/config.def.h >$HOME/st/backups/$date && exit
+[ -n "$patch" ] && patch -Np1 -i $patch && exit
+[ -f $HOME/st/config.h ] && sudo rm $HOME/st/config.h
+
+cd $HOME/st/
+sudo make clean install

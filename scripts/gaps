@@ -1,0 +1,12 @@
+#!/bin/bash
+[ -z $1 ] && echo "Usage: $0 <on/off>" && exit
+
+if [ "$1" == "on" ]; then
+    i3-msg "gaps inner all set 10" >> /dev/null
+    echo "Enabled gaps"
+elif [ "$1" == "off" ]; then
+    i3-msg "gaps inner all set 0" >> /dev/null
+    echo "Disabled gaps"
+else
+    echo "Incorrect input: <on/off>"
+fi

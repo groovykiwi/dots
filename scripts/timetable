@@ -1,0 +1,2 @@
+#!/bin/bash
+sxiv -g 1920x1080 ~/Pictures/forest.jpg

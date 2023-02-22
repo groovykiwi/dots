@@ -1,0 +1,4 @@
+#!/bin/bash
+[ -z "$1" ] && echo "Usage: lolban <text> (loop) "
+
+[ "$2" == "loop" ] && while true 2>&1; do toilet -t -f 3d.flf "$1" | lolcat && sleep 0.5s; done || toilet -t -f 3d.flf "$1" | lolcat

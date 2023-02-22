@@ -1,0 +1,12 @@
+#!/bin/bash
+#CONFIG EDIT
+
+editor="code"
+
+file=$(
+  find ~/.config/ -type f \( -iname "config*" -o -iname "*.conf" -o -iname "*.yml" -o -iname "*rc" \) -not \( -path "/home/nate/.config/Code\ -\ OSS/*" -o -path "/home/nate/.config/libreoffice/*" -o -path "/home/nate/.config/discord/*" -o -path "/home/nate/.config/GIMP/*" \) |
+    sed 's/.*config\///g' |
+    fzy -l 15
+)
+
+! [ -z $file ] && file="$HOME/.config/$file" && $editor $file && wmctrl -s 2
